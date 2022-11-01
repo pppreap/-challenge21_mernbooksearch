@@ -4,7 +4,7 @@ import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'reac
 import Auth from '../utils/auth';
 import { searchGoogleBooks } from '../utils/API';
 import { saveBookIds, getSavedBookIds } from '../utils/localStorage';
-import  { useMutation } from '@apollo/react-hooks';
+import  { useMutation } from '@apollo/client';
 import { SAVE_BOOK } from '../utils/mutations';
 
 const SearchBooks = () => {
@@ -16,15 +16,17 @@ const SearchBooks = () => {
   // create state to hold saved bookId values
   const [savedBookIds, setSavedBookIds] = useState(getSavedBookIds());
 
+  const [saveBook] = useMutation(SAVE_BOOK);
+
   // set up useEffect hook to save `savedBookIds` list to localStorage on component unmount
   // learn more here: https://reactjs.org/docs/hooks-effect.html#effects-with-cleanup
   useEffect(() => {
-    return () =>{
+    return () =>
       saveBookIds(savedBookIds);
-    } 
+    
   });
 
-  const [saveBook, { error }] = useMutation(SAVE_BOOK);
+ 
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event) => {
@@ -64,20 +66,16 @@ const SearchBooks = () => {
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
 
     // get token
-    const token = Auth.loggedIn() ? Auth.getToken() : null;
+    // const token = Auth.loggedIn() ? Auth.getToken() : null;
 
-    if (!token) {
-      return false;
-    }
+    // if (!token) {
+    //   return false;
+    // }
 
     try {
-      const response = await saveBook({
+      await saveBook({
         variables:{ input: bookToSave,},
       });
-
-      if (!response){
-        throw new Error('Something went wrong');
-      }
         // console.log(savedBookIds);
         setSavedBookIds([...savedBookIds, bookToSave.bookId])
     } catch (err) {
