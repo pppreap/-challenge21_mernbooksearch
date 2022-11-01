@@ -3,21 +3,24 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@apollo/client": "^3.3.20",
+    "@apollo/client": "^3.5.9",
+    "@apollo/react-hooks": "^4.0.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "apollo-boost": "^0.4.9",
     "bootstrap": "^4.4.1",
-    "dotenv": "^16.0.3",
-    "graphql": "^15.5.1",
-    "graphql-tag": "^2.12.5",
+    "concurrently": "^7.0.0",
+    "graphql": "^15.8.0",
+    "graphql-tag": "^2.12.6",
     "jwt-decode": "^2.2.0",
-    "mongoose": "^6.7.0",
     "react": "^16.13.1",
     "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-redux": "^7.2.6",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "redux": "^4.1.2"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -39,5 +42,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/jwt-decode": "^3.1.0"
   }
 }
