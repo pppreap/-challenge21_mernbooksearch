@@ -1,34 +1,24 @@
+
 {
   "name": "challenge21_mernbooksearch",
-  "version": "1.0.0",
-  "description": "",
-  "main": "server/server.js",
-  "scripts": {
-    "start": "node server/server.js",
-    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
-    "install": "cd server && npm i && cd ../client && npm i",
-    "build": "cd client && npm run build"
-  },
-  "engines": { 
-    "node": "16.16.0" 
-  } ,
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pppreap/-challenge21_mernbooksearch.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "concurrently": "^5.1.0"
-  },
-  "dependencies": {
-    "@apollo/client": "^3.7.1",
-    "axios": "^1.1.3",
-    "body-parser": "^1.20.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "mongoose": "^6.7.0"
+    "version": "1.0.0",
+    "description": "",
+    "main": "server/server.js",
+    "scripts": {
+      "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+      "start:prod": "cd server && npm start",
+      "start:dev": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+      "install": "cd server && npm i && cd ../client && npm i",
+      "seed": "cd server && npm run seed",
+      "heroku-postbuild": "cd client && npm run build"
+    },
+    "keywords": [],
+    "author": "Janarthani V Subramaniam",
+    "license": "ISC",
+    "devDependencies": {
+      "concurrently": "^5.1.0"
+    },
+    "dependencies": {
+      "if-env": "^1.0.4"
+    }
   }
-}

@@ -15,7 +15,7 @@ const SignupForm = () => {
   // set state for alert
   const [showAlert, setShowAlert] = useState(false);
 
-  const [addUser]= useMutation(ADD_USER);
+  const [addUser, { error }] = useMutation(ADD_USER);
 
   // useEffect(()=>{
   //   if (error){
@@ -46,9 +46,9 @@ const SignupForm = () => {
       });
       console.log(data);
       Auth.login(data.addUser.token);
-    } catch (err) {
-      console.error(err);
-      setShowAlert(true);
+    } catch (e) {
+      console.error(e);
+      // setShowAlert(true);
     }
 
     setUserFormData({
@@ -64,7 +64,7 @@ const SignupForm = () => {
       <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
         {/* show alert if server response is bad */}
         <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
+        {error && <br>Sign-up failed.</br>}
         </Alert>
 
         <Form.Group>
@@ -116,4 +116,4 @@ const SignupForm = () => {
   );
 };
 
-export default SignupForm;
+export default SignupForm
