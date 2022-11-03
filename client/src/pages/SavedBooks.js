@@ -1,22 +1,22 @@
 import React from 'react';
 import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
-import { useQuery, useMutation } from '@apollo/client';
-
-import { GET_ME } from '../utils/queries';
-import { REMOVE_BOOK } from '../utils/mutations';
-
-import { removeBookId } from '../utils/localStorage';
 import Auth from '../utils/auth';
+import { removeBookId } from '../utils/localStorage';
+// Add mutation and queries
+import { useMutation, useQuery } from '@apollo/client'
+import { GET_ME } from '../utils/queries'
+import { REMOVE_BOOK } from '../utils/mutations'
+
 
 const SavedBooks = () => {
- 
-  const [removeBook, { error }] = useMutation(REMOVE_BOOK);
-  const { loading, data } = useQuery(GET_ME);
-  const user = data?.me || {};
 
-  // create function that accepts the book's _id value as param and deletes the book from the database
+  const [removeBook, { error }] = useMutation(REMOVE_BOOK)
+
+  const { loading, data } = useQuery(GET_ME)
+  const user = data?.me || {}
+
+  // create function that accepts the book's mongo _id value as param and deletes the book from the database
   const handleDeleteBook = async (bookId) => {
-    // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
 
     if (!token) {
@@ -28,9 +28,11 @@ const SavedBooks = () => {
       const { data } = await removeBook({
         variables: { bookId }
       })
+
       if (error) {
         throw new Error('something went wrong!');
       }
+
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
@@ -43,18 +45,15 @@ const SavedBooks = () => {
     return <h2>LOADING...</h2>;
   }
 
-  // const savedBookIds = userData.savedBooks.map((book) => book.bookId);
-  //   saveBookIds(savedBookIds);
-
-    return (
-      <>
-        <Jumbotron fluid className='text-light bg-dark'>
-          <Container>
-            <h1>Viewing saved books!</h1>
-          </Container>
-        </Jumbotron>
+  return (
+    <>
+      <Jumbotron fluid className='text-light bg-dark'>
         <Container>
-          <h2>
+          <h1>Viewing saved books!</h1>
+        </Container>
+      </Jumbotron>
+      <Container>
+        <h2>
           {user.savedBooks.length
             ? `Viewing ${user.savedBooks.length} saved ${user.savedBooks.length === 1 ? 'book' : 'books'}:`
             : 'You have no saved books!'}
@@ -80,5 +79,5 @@ const SavedBooks = () => {
     </>
   );
 };
-  
-  export default SavedBooks;
+
+export default SavedBooks;
