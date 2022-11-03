@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/googlebooks', {
+mongoose.connect('mongodb+srv://user:coding9@cluster0.cryb1id.mongodb.net/?retryWrites=true&w=majority' || 'mongodb://localhost:27017/mern-book', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: false,
+  // useFindAndModify: false,
 // }).catch ((err) => {
 //   console.log(err);
 });
