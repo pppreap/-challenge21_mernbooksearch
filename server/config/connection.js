@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://user:coding9@cluster0.cryb1id.mongodb.net/?retryWrites=true&w=majority' || 'mongodb://localhost:27017/mern-book', {
+mongoose.connect('mongodb+srv://user:coding9@cluster0.cryb1id.mongodb.net/?retryWrites=true&w=majority', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,

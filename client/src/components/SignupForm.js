@@ -40,11 +40,12 @@ const SignupForm = () => {
       event.stopPropagation();
     }
 
+ 
     try {
+      // use add user mutation
       const { data } = await addUser({
-        variables:{...userFormData},
+        variables: { ...userFormData },
       });
-      console.log(data);
       Auth.login(data.addUser.token);
     } catch (err) {
       console.error(err);
@@ -52,9 +53,9 @@ const SignupForm = () => {
     }
 
     setUserFormData({
-      username: '',
-      email: '',
-      password: '',
+      username: "",
+      email: "",
+      password: "",
     });
   };
 
